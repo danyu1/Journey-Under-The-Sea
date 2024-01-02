@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace TarodevController
 {
@@ -19,6 +20,27 @@ namespace TarodevController
         private FrameInput _frameInput;
         private Vector2 _frameVelocity;
         private bool _cachedQueryStartInColliders;
+        private float lastDamaged, invincibilityTime;
+        void Damage(int amount)
+        {
+            if (Time.timeSinceLevelLoad - lastDamaged >= invincibilityTime)
+            {
+                lastDamaged = Time.timeSinceLevelLoad;
+                Debug.Log("damage " + amount);
+            }
+        }
+        private void OnTriggerEnter2D(Collider2D coll)
+        {
+            GameObject obj = coll.gameObject;
+            if (coll.CompareTag("Damage"))
+            {
+                Damage(1);
+            }
+            else if (coll.CompareTag("trans"))
+            {
+                SceneManager.LoadScene("GroundworkEmpty");
+            }
+        }
 
         #region Interface
 
@@ -36,6 +58,7 @@ namespace TarodevController
             _col = GetComponent<CapsuleCollider2D>();
 
             _cachedQueryStartInColliders = Physics2D.queriesStartInColliders;
+            lastDamaged = 0;
         }
 
         private void Update()
@@ -221,4 +244,5 @@ namespace TarodevController
         public event Action Jumped;
         public Vector2 FrameInput { get; }
     }
+
 }

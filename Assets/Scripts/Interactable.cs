@@ -1,18 +1,37 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Collider2D collider1;
+    public Collider2D collider2;
+    bool uiUp;
+    private void Awake()
     {
-        
+        uiUp = false;
     }
-
-    // Update is called once per frame
     void Update()
     {
-        
+        if (collider1 != null && collider2 != null)
+        {
+            //if (Input.GetButtonDown("Submit"))
+            //{
+            //    //Debug.Log("PopUpUI");
+            //}
+            if (collider1.bounds.Intersects(collider2.bounds) && Input.GetButtonDown("Submit"))
+            {
+                Debug.Log("PopUpUI");
+                uiUp = true;
+            }
+            else
+            {
+                uiUp = false;
+                
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Ensure both colliders are assigned.");
+        }
     }
 }

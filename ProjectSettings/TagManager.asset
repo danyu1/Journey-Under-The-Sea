@@ -5,11 +5,13 @@ TagManager:
   serializedVersion: 2
   tags:
   - NPC
+  - Damage
+  - trans
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ignore Physics
   - Water
   - UI
   - 
