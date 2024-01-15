@@ -1,35 +1,50 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class QuickTimeTimer : MonoBehaviour
+public class TimerBar : MonoBehaviour
 {
-    public RectTransform timerBarImage;  // Reference to the Image component of the timer bar
-    public float initialWidth = 200f;  // Initial width of the bar
+    public Image timerBarImage;  // Reference to the Image component of the timer bar
+    public RectTransform quickTimer;
+    public float initialWidth;
     public float countdownDuration = 10f;  // Duration of the countdown in seconds
 
-    private float timeRemaining;  // Time remaining in the countdown
+    private float timePast;  // Time remaining in the countdown
+    public Boolean timeUp;
 
     void Start()
     {
-        timeRemaining = countdownDuration;
-        timerBarImage.sizeDelta = new Vector2(initialWidth, timerBarImage.sizeDelta.y);
+        initialWidth = quickTimer.rect.width;  // Initial width of the bar; subtraction just to hid the corners
+        //Debug.Log("initwidth" + initialWidth);
+        //Debug.Log("init rect width" + timerBarImage.rectTransform.rect.width);
+        timePast = 0;
+
+        //timerBarImage.rectTransform.sizeDelta = new Vector2(initialWidth, timerBarImage.rectTransform.sizeDelta.y);
     }
 
     void Update()
     {
-        timeRemaining -= Time.deltaTime;
+        if (!timeUp)
+        {
+            timePast += Time.deltaTime;
 
-        // Resize the bar based on the remaining time
-        float widthFactor = timeRemaining / countdownDuration;
-        timerBarImage.sizeDelta = new Vector2(initialWidth * widthFactor, timerBarImage.sizeDelta.y);
+            // Resize the bar based on the remaining time
+            //Debug.Log(timerBarImage.rectTransform.rect.width);
+            float widthFactor = timePast / countdownDuration;
+            //initialWidth* widthFactor
+            timerBarImage.rectTransform.sizeDelta = new Vector2(-initialWidth * widthFactor, timerBarImage.rectTransform.sizeDelta.y);
+            //Debug.Log(timerBarImage.rectTransform.rect.width);
+        }
 
         // Check if the timer has finished
-        if (timeRemaining <= 0f)
+        if (timePast >= countdownDuration)
         {
+            timeUp = true;
             // Perform any actions needed when the timer ends
             // (e.g., trigger events, change game state, etc.)
-            Debug.Log("Timer finished!");
+            //Debug.Log("Timer finished!");
         }
     }
 }
