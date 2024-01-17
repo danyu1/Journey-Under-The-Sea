@@ -21,7 +21,7 @@ public class Page10Squid : MonoBehaviour
 
         // Calculate the distance between the mouse and the midline
         float mouseMidlineDistance = Mathf.Abs(mouseWorldPos.x - transform.position.x);
-        Debug.Log(mouseMidlineDistance);
+        //Debug.Log(mouseMidlineDistance);
 
         // scale the sprite based on the distance
         float scaleFactor = Mathf.Clamp01(1 - mouseMidlineDistance / midlineTolerance) * maxScale;
