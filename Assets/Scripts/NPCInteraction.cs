@@ -4,16 +4,5 @@ using UnityEngine;
 
 public class NPCInteraction : MonoBehaviour
 {
-    private CapsuleCollider2D collider;
-    // Start is called before the first frame update
-    void Awake()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public string[] words;
 }

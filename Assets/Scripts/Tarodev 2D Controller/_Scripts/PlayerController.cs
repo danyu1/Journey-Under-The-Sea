@@ -29,18 +29,18 @@ namespace TarodevController
                 Debug.Log("damage " + amount);
             }
         }
-        private void OnTriggerEnter2D(Collider2D coll)
-        {
-            GameObject obj = coll.gameObject;
-            if (coll.CompareTag("Damage"))
-            {
-                Damage(1);
-            }
-            else if (coll.CompareTag("trans"))
-            {
-                SceneManager.LoadScene("GroundworkEmpty");
-            }
-        }
+        //private void OnTriggerEnter2D(Collider2D coll)
+        //{
+        //    GameObject obj = coll.gameObject;
+        //    if (coll.CompareTag("Damage"))
+        //    {
+        //        Damage(1);
+        //    }
+        //    else if (coll.CompareTag("trans"))
+        //    {
+        //        SceneManager.LoadScene("GroundworkEmpty");
+        //    }
+        //}
 
         #region Interface
 
